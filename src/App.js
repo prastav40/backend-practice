@@ -4,6 +4,7 @@ const mongodb = require('./config/mongo');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
+const connectionstatus=require("../src/routes/connectionstatus")
 
 app.use(express.json());
 app.use(cookieParser());
@@ -11,6 +12,7 @@ app.use(cookieParser());
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
+app.use("/",connectionstatus)
 
 
 // --- DATABASE CONNECTION ---

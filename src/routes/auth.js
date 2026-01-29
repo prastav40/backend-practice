@@ -3,14 +3,13 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authrouter=express.Router();
-const JWT_SECRET="backend"; // Keep this in environment variables in production
+const JWT_SECRET="backend"; 
 
 
 authrouter.post("/signup",async(req,res)=>{
      try {
             const { password, firstname, lastname, email } = req.body;
     
-            // Generate hash using await correctly
             const hashedPassword = await bcrypt.hash(password, 10);
     
             const user = new User({

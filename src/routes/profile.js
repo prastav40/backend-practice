@@ -6,7 +6,6 @@ const { usereditvalidate } = require('../utils/usereditvalidate');
 profilerouter.get("/profile/view",userauth,async(req,res)=>{
     try {
         const user = req.user; // You defined it as 'user'
-        console.log("Authenticated user:", user);
         // ERROR HERE: You are checking 'userData', but it doesn't exist!
         if (!user) { 
             return res.status(404).json({ error: "User not found" });
