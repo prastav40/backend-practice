@@ -12,7 +12,7 @@ router.get("/user/requests/pending", userauth, async (req, res) => {
             receiverid: userId,
             status: "interested"
         })
-            .populate('senderid', 'firstname lastname');
+            .populate('senderid', 'firstname lastname photourl about gender age');
 
         res.status(200).json({
             message: "Pending requests fetched successfully",
@@ -30,7 +30,7 @@ router.get("/user/requests/accepted", userauth, async (req, res) => {
         const accepted = await ConnectionRequest.find({
             receiverid: user,
             status: "accepted"
-        }).populate('senderid', 'firstname lastname');
+        }).populate('senderid', 'firstname lastname photourl about gender age');
 
         if (accepted) {
             res.status(200).json({
@@ -49,6 +49,10 @@ router.get("/feed", userauth, async (req, res) => {
         const limit=parseInt(req.query.limit) || 10;
         const skip=parseInt((limit-1)*(req.query.skip)) || 0;
 
+        if(limit>20 || limit<1){
+            limit=10
+        }
+
         const connectionRequests = await ConnectionRequest.find({
             $or: [{ senderid: userId }, { receiverid: userId }]
         }).select("senderid receiverid");
@@ -66,8 +70,8 @@ router.get("/feed", userauth, async (req, res) => {
                 $ne: userId                          
             }
         }).skip(skip).limit(limit)
-        .select("_id firstname lastname photoUrl about skills") 
-      
+        .select("_id firstname lastname photourl about gender age"); 
+      9
         res.json(users);
 
     } catch (err) {

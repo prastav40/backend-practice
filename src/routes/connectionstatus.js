@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 
 router.post("/request/send/:status/:userwhoreceive", userauth, async (req, res) => {
     try {
-        const receiverid = req.user._id;
-        const senderid = req.params.userwhoreceive;
+        const senderid = req.user._id;
+        const receiverid = req.params.userwhoreceive;
         const status = req.params.status;
 
         const allowedStatuses = ["interested", "ignored"];
@@ -80,6 +80,7 @@ router.post("/request/review/:status/:objectidofconnectionrequeststatus", userau
 
         connectionRequest.status = status;
         const data = await connectionRequest.save();
+        console.log(data)
 
         console.log("RESULT: Success");
         res.json({ message: "Connection request " + status, data: data });

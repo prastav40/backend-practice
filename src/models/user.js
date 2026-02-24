@@ -6,9 +6,9 @@ const userSchema= new mongoose.Schema({
     firstname: {
         type: String
     },
-   lastname:{
+    lastname:{
         type: String,   
-   } ,
+    } ,
     email:{ 
         type: String,
         validate(value){
@@ -25,6 +25,12 @@ const userSchema= new mongoose.Schema({
     },
     gender:{
         type: String,
+    },
+    about:{
+        type: String,
+    },
+    photourl:{
+        type: String
     }
 });
 

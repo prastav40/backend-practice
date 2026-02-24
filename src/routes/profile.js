@@ -22,6 +22,7 @@ profilerouter.patch("/profile/edit", userauth, async (req, res) => {
             return res.status(400).json({ error: "Invalid updates!" });
         }
         const user = req.user;
+        console.log(user)
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
