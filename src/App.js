@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const mongodb = require('./config/mongo'); 
 const cors = require("cors");
+require('dotenv').config();
 
 // Import Routers
 const authRouter = require('./routes/auth');
